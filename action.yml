@@ -5,8 +5,11 @@ inputs:
   token:  # username to use
     description: 'Github token'
     required: true
-  dispatch:  # username to use
+  dispatch:  # name to use
     description: 'JSON array of workflows to trigger'
+    required: true
+  github:  # name to use
+    description: 'GitHub API URI'
     required: true
 outputs:
   sha:
@@ -17,3 +20,4 @@ runs:
   args:
     - ${{ inputs.token }}
     - ${{ inputs.dispatch }}
+    - ${{ inputs.github }}
