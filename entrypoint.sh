@@ -4,13 +4,13 @@ set -e -o pipefail
 
 GIT_TOKEN="${INPUT_TOKEN}"
 DISPATCHES="${INPUT_DISPATCH}"
-
+GIT_URI="${INPUT_GIT_URI}"
 
 validate_vars() {
 
   if [ -z "${GIT_TOKEN}" ]; then echo "::error::Password/token not set";  exit 1; fi
   if [ -z "${DISPATCHES}" ]; then echo "::error::Dispatches not set";  exit 2; fi
-
+  if [ -z "${GIT_URI}" ]; then echo "::error::Git URI not set";  exit 2; fi
 }
 
 check_commands() {
@@ -43,7 +43,7 @@ EOF
      -X POST \
      -H "Accept: application/vnd.github.v3+json" \
      -H "Authorization: token ${GIT_TOKEN}" \
-     https://api.github.com/repos/${ORG}/${REPO}/actions/workflows/${WORKFLOW}/dispatches \
+     https://${GIT_URI}/repos/${ORG}/${REPO}/actions/workflows/${WORKFLOW}/dispatches \
      -d "$(_post_data)"
 
   done
