@@ -28,7 +28,8 @@ trigger_dispatches() {
     REPO=`echo ${dispatch} | jq -r '.repo'`
     BRANCH=`echo ${dispatch} | jq -r '.branch'`
     WORKFLOW=`echo ${dispatch} | jq -r '.workflow'`
-
+    DATA=`echo ${dispatch} | jq -r '.data'`
+    
     _post_data(){
       cat <<EOF
       {"ref": "refs/heads/${BRANCH}"}
@@ -44,7 +45,7 @@ EOF
      -H "Accept: application/vnd.github.v3+json" \
      -H "Authorization: token ${GIT_TOKEN}" \
      https://${GIT_URI}/repos/${ORG}/${REPO}/actions/workflows/${WORKFLOW}/dispatches \
-     -d "$(_post_data)"
+     -d "${DATA}"
 
   done
 
