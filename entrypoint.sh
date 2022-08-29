@@ -4,7 +4,7 @@ set -e -o pipefail
 
 GIT_TOKEN="${INPUT_TOKEN}"
 DISPATCHES="${INPUT_DISPATCH}"
-GIT_URI="${INPUT_GIT_URI}"
+GIT_URI="${INPUT_GITHUB}"
 
 validate_vars() {
 
